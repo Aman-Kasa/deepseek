@@ -1,15 +1,27 @@
 // Fetch transaction data and create chart
 const ctx = document.getElementById('transaction-chart').getContext('2d');
 const transactionTypeSelect = document.getElementById('transaction-type');
+let chart;
 
 const fetchData = async (type) => {
-    const response = await fetch('/get-data?type=' + type);
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch('/get-data?type=' + type);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch error: ', error);
+        return { labels: [], values: [] };
+    }
 };
 
 const createChart = (data) => {
-    const chart = new Chart(ctx, {
+    if (chart) {
+        chart.destroy();
+    }
+    chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: data.labels,
