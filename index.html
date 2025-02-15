@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMo Data Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>MoMo Data Analysis</h1>
+        <div class="filter">
+            <label for="transaction-type">Transaction Type:</label>
+            <select id="transaction-type">
+                <option value="all">All</option>
+                <option value="Incoming Money">Incoming Money</option>
+                <option value="Payments to Code Holders">Payments to Code Holders</option>
+                <option value="Withdrawals from Agents">Withdrawals from Agents</option>
+            </select>
+        </div>
+        <canvas id="transaction-chart"></canvas>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
