@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoMo Data Dashboard for analyzing financial transactions.">
     <title>MoMo Data Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -22,5 +23,66 @@
         <canvas id="transaction-chart"></canvas>
     </div>
     <script src="app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize chart
+            const ctx = document.getElementById('transaction-chart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar', // or 'line', 'pie', etc.
+                data: {
+                    labels: [], // Add labels dynamically
+                    datasets: [{
+                        label: 'Transactions',
+                        data: [], // Add data dynamically
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Transaction Types'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (RWF)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Update chart with new data
+            document.getElementById('transaction-type').addEventListener('change', function () {
+                const selectedType = this.value;
+                // Fetch and update chart data based on selectedType
+                // Example: fetchChartData(selectedType).then(data => updateChart(chart, data));
+            });
+
+            // Function to update chart data
+            function updateChart(chart, data) {
+                chart.data.labels = data.labels;
+                chart.data.datasets[0].data = data.values;
+                chart.update();
+            }
+
+            // Example function to fetch chart data (replace with actual data fetching logic)
+            async function fetchChartData(type) {
+                // Replace with actual data fetching logic
+                return {
+                    labels: ['Jan', 'Feb', 'Mar'],
+                    values: [1000, 2000, 3000]
+                };
+            }
+        });
+    </script>
 </body>
 </html>
